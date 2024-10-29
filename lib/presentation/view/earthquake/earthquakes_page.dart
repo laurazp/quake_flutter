@@ -5,6 +5,7 @@ import 'package:quake_flutter/model/earthquake_list.dart';
 import 'package:quake_flutter/model/earthquake.dart';
 import 'package:quake_flutter/presentation/model/resource_state.dart';
 import 'package:quake_flutter/presentation/view/earthquake/viewmodel/earthquakes_view_model.dart';
+import 'package:quake_flutter/presentation/widget/earthquake_list_row.dart';
 import 'package:quake_flutter/presentation/widget/error/error_view.dart';
 import 'package:quake_flutter/presentation/widget/loading/loading_view.dart';
 
@@ -115,21 +116,23 @@ class _EarthquakesPageState extends State<EarthquakesPage> {
   Widget _getContentView() {
     return RefreshIndicator(
       onRefresh: () async {
-        // _nextPage = 0;
+        _nextPage = 0;
         // _earthquakesViewModel.fetchPagingMonumentList(_nextPage);
       },
       child: Scrollbar(
         controller: _scrollController,
-        child: ListView.builder(
+        child: ListView.separated(
           controller: _scrollController,
           itemCount: _earthquakes.length, //_filteredEarthquakes.length,
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
           itemBuilder: (context, index) {
             // final item = _filteredEarthquakes[index];
             final item = _earthquakes[index];
-            return Text(item.title ?? "Unknown");
-            // return EarthquakeListRow(earthquake: item);
+            return EarthquakeListRow(earthquake: item);
           },
+          separatorBuilder: (context, index) => const SizedBox(
+            height: 6,
+          )
         ),
       ),
     );
