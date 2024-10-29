@@ -1,6 +1,8 @@
 import 'package:quake_flutter/data/earthquake/remote/mapper/earthquake_list_remote_mapper.dart';
+import 'package:quake_flutter/data/earthquake/remote/mapper/earthquake_remote_mapper.dart';
 import 'package:quake_flutter/data/earthquake/remote/mapper/paging_earthquake_list_remote_mapper.dart';
 import 'package:quake_flutter/data/earthquake/remote/model/earthquake_list_remote_model.dart';
+import 'package:quake_flutter/data/earthquake/remote/model/earthquake_remote_model.dart';
 import 'package:quake_flutter/data/remote/error/remote_error_mapper.dart';
 import 'package:quake_flutter/data/remote/network_client.dart';
 import 'package:quake_flutter/data/remote/network_constants.dart';
@@ -56,16 +58,17 @@ class EarthquakesRemoteImpl {
     }
   }
 
-  //TODO: Revisar si hace falta !! O modificar para que navegue a la url de la web
-  /* Future<Feature> getEarthquakeDetail(String earthquakeId) async {
+  Future<Earthquake> getEarthquakeDetail(String earthquakeId) async {
     try {
       final response = await _networkClient.dio.get(
-        NetworkConstants.getEarthquakeDetailPath(earthquakeId),
-        queryParameters: {"srsname": "wgs84"},
-      );
-      return EarthquakeRemoteMapper.fromRemote(EarthquakeRemoteModel.fromMap(response.data));
+        NetworkConstants.EARTHQUAKE_DETAIL_PATH,
+        queryParameters: {
+          "eventid": earthquakeId,
+          "format": "geojson"
+        });
+      return EarthquakeRemoteMapper.fromRemote(Feature.fromMap(response.data));
     } catch (error) {
       throw RemoteErrorMapper.getException(error);
     }
-  } */
+  }
 }

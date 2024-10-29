@@ -1,7 +1,7 @@
 import 'package:quake_flutter/data/earthquake/remote/earthquakes_remote_impl.dart';
 import 'package:quake_flutter/domain/earthquakes_repository.dart';
+import 'package:quake_flutter/model/earthquake.dart';
 import 'package:quake_flutter/model/earthquake_list.dart';
-// import 'package:quake_flutter/model/feature.dart';
 
 class EarthquakesDataImpl extends EarthquakesRepository {
   final EarthquakesRemoteImpl _remoteApiImpl;
@@ -16,13 +16,13 @@ class EarthquakesDataImpl extends EarthquakesRepository {
   }
 
   // @override
-  // Future<List<Feature>> getMapEarthquakeList() {
+  // Future<List<Earthquake>> getMapEarthquakeList() {
   //   return _remoteApiImpl.getEarthquakeListForMap(startTime, endTime, limit, offset);
   // }
 
-  // @override
-  // Future<Feature> getEarthquakeDetail(String earthquakeId) async {
-  //   final remoteEarthquake = await _remoteApiImpl.getEarthquakeDetail(earthquakeId);
-  //   return remoteEarthquake;
-  // }
+  @override
+  Future<Earthquake> getEarthquakeDetail(String earthquakeId) async {
+    final remoteEarthquake = await _remoteApiImpl.getEarthquakeDetail(earthquakeId);
+    return remoteEarthquake;
+  }
 }

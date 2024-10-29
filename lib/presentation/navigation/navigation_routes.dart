@@ -1,6 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:go_router/go_router.dart';
+import 'package:quake_flutter/presentation/view/earthquake/earthquake_detail_page.dart';
 import 'package:quake_flutter/presentation/view/earthquake/earthquakes_page.dart';
 import 'package:quake_flutter/presentation/view/home/home_page.dart';
 import 'package:quake_flutter/presentation/view/map/map_page.dart';
@@ -32,14 +33,14 @@ final GoRouter router =
           GoRoute(
             path: NavigationRoutes.EARTHQUAKES_ROUTE,
             builder: (context, state) => const EarthquakesPage(),
-            /* routes: [
+             routes: [
               GoRoute(
                 path: NavigationRoutes._EARTHQUAKE_DETAIL_PATH,
                 builder: (context, state) => EarthquakeDetailPage(
-                  monumentId: state.extra as String,
+                  earthquakeId: state.extra as String,
                 ),
               )
-            ], */
+            ],
           ),
         ]), 
          StatefulShellBranch(routes: [

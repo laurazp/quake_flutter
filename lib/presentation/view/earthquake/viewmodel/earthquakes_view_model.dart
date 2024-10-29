@@ -40,16 +40,16 @@ class EarthquakesViewModel extends BaseViewModel {
             (error) => getEarthquakeListState.add(ResourceState.error(error)));
   }
 
-  // fetchEarthquakeDetail(String earthquakeId) {
-  //   getEarthquakeDetailState.add(ResourceState.loading());
+  fetchEarthquakeDetail(String earthquakeId) {
+    getEarthquakeDetailState.add(ResourceState.loading());
 
-  //   _earthquakesRepository
-  //       .getEarthquakeDetail(earthquakeId)
-  //       .then(
-  //           (value) => getEarthquakeDetailState.add(ResourceState.success(value)))
-  //       .catchError(
-  //           (error) => getEarthquakeDetailState.add(ResourceState.error(error)));
-  // }
+    _earthquakesRepository
+        .getEarthquakeDetail(earthquakeId)
+        .then(
+            (value) => getEarthquakeDetailState.add(ResourceState.success(value)))
+        .catchError(
+            (error) => getEarthquakeDetailState.add(ResourceState.error(error)));
+  }
 
   @override
   void dispose() {
