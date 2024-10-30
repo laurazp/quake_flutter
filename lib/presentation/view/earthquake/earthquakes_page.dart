@@ -26,11 +26,10 @@ class _EarthquakesPageState extends State<EarthquakesPage> {
 
   final ScrollController _scrollController = ScrollController();
   bool _hasMoreItems = true;
-  int _nextPage = 0;
   String startTime = "2024-10-27"; 
   String endTime = "2024-10-28";
-  int limit = 50;
-  int offset = 1;
+  final int _limit = 50; //TODO: añadirlo en constantes y asignarlo sólo en la última llamada?
+  int _offset = 1;
 
   @override
   void initState() {
@@ -52,8 +51,8 @@ class _EarthquakesPageState extends State<EarthquakesPage> {
           setState(() {
             LoadingView.hide();
             ErrorView.show(context, state.exception!.toString(), () {
-              _nextPage = 0;
-              _earthquakesViewModel.fetchPagingEarthquakeList(startTime, endTime, limit, offset);
+              _offset = 1;
+              _earthquakesViewModel.fetchPagingEarthquakeList(startTime, endTime, _limit, _offset);
             });
           });
           break;
@@ -64,11 +63,11 @@ class _EarthquakesPageState extends State<EarthquakesPage> {
       if (_scrollController.position.pixels ==
               _scrollController.position.maxScrollExtent &&
           _hasMoreItems) {
-        _earthquakesViewModel.fetchPagingEarthquakeList(startTime, endTime, limit, offset); //TODO: Modificar con nextPage o cambiar
+        _earthquakesViewModel.fetchPagingEarthquakeList(startTime, endTime, _limit, _offset);
       }
     });
 
-    _earthquakesViewModel.fetchPagingEarthquakeList(startTime, endTime, limit, offset);
+    _earthquakesViewModel.fetchPagingEarthquakeList(startTime, endTime, _limit, _offset);
   }
 
   @override
@@ -116,8 +115,8 @@ class _EarthquakesPageState extends State<EarthquakesPage> {
   Widget _getContentView() {
     return RefreshIndicator(
       onRefresh: () async {
-        _nextPage = 0;
-        // _earthquakesViewModel.fetchPagingMonumentList(_nextPage);
+        _offset = 1;
+        _earthquakesViewModel.fetchPagingEarthquakeList(startTime, endTime, _limit, _offset);
       },
       child: Scrollbar(
         controller: _scrollController,
@@ -204,13 +203,13 @@ class _EarthquakesPageState extends State<EarthquakesPage> {
   // }
 
   _addEarthquakes(EarthquakeList response) async {
-    if (_nextPage == 0) {
+    if (_offset == 1) {
       _earthquakes.clear();
     }
 
     _earthquakes.addAll(response.earthquakes);
     // _hasMoreItems = response.totalCount > _earthquakes.length;
-    _nextPage += 1;
+    _offset += 50;
 
     setState(() {});
   }
