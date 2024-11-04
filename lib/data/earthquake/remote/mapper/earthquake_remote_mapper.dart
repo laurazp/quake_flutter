@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:quake_flutter/core/formatters/earthquake_coords_formatter.dart';
 import 'package:quake_flutter/core/formatters/earthquake_title_formatter.dart';
 import 'package:quake_flutter/core/formatters/tsunami_value_formatter.dart';
@@ -14,7 +15,8 @@ class EarthquakeRemoteMapper {
       url: remoteModel.properties.url, 
       tsunami: TsunamiValueFormatter.getTsunamiValue(remoteModel.properties.tsunami ?? 0), 
       title: EarthquakeTitleFormatter.getSimplifiedTitle(remoteModel.properties.title ?? "", remoteModel.properties.place ?? ""),
-      coordinates: EarthquakeCoordsFormatter.getFormattedCoords(remoteModel.geometry?.coordinates ?? [0.0, 0.0]), //TODO: Manage null coordinates!
+      originalCoordinates: LatLng(remoteModel.geometry?.coordinates[1] ?? 0.0, remoteModel.geometry?.coordinates[0] ?? 0.0), //TODO: Manage null coordinates!
+      formattedCoordinates: EarthquakeCoordsFormatter.getFormattedCoords(remoteModel.geometry?.coordinates), 
       id: remoteModel.id.toString()); //TODO: Manage id?
   }
 

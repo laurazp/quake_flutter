@@ -1,4 +1,6 @@
 
+import 'package:latlong2/latlong.dart';
+
 class Earthquake {
   double magnitude;
   String place;
@@ -6,7 +8,8 @@ class Earthquake {
   String url;
   String tsunami;
   String title;
-  String coordinates;
+  LatLng originalCoordinates;
+  String formattedCoordinates;
   String id;
 
   Earthquake({
@@ -16,7 +19,8 @@ class Earthquake {
     required this.url,
     required this.tsunami,
     required this.title,
-    required this.coordinates,
+    required this.originalCoordinates,
+    required this.formattedCoordinates,
     required this.id,
   });
 }

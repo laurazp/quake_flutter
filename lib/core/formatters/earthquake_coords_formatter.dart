@@ -17,6 +17,6 @@ class EarthquakeCoordsFormatter {
             latitudeString = "${latitude.toString()}N";
         }
         
-        return "$longitudeString, $latitudeString";
+        return "$latitudeString, $longitudeString";
     }
 }
