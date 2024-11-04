@@ -29,12 +29,12 @@ class Feature {
 
   Earthquake toEarthquake() {
     return Earthquake(
-      magnitude: properties.mag, 
-      place: properties.place, 
+      magnitude: properties.mag ?? 0.0, 
+      place: properties.place ?? "Unknown", 
       time: properties.time, 
       url: properties.url, 
       tsunami: properties.tsunami.toString(), 
-      title: properties.title, 
+      title: properties.title ?? "Unknown", 
       coordinates: EarthquakeCoordsFormatter.getFormattedCoords(geometry?.coordinates ?? [0.0, 0.0]), //TODO: Manage null coordinates!
       id: id
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quake_flutter/core/di/app_modules.dart';
+import 'package:quake_flutter/core/formatters/magnitude_color_formatter.dart';
 import 'package:quake_flutter/model/earthquake.dart';
 import 'package:quake_flutter/presentation/model/resource_state.dart';
 import 'package:quake_flutter/presentation/view/earthquake/viewmodel/earthquakes_view_model.dart';
@@ -89,12 +90,12 @@ class _EarthquakeDetailPageState extends State<EarthquakeDetailPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            earthquakeInfoDetail("Place", _earthquake?.place ?? "Unknown"),
-                            earthquakeInfoDetail("Time", _earthquake?.time.toString() ?? "time"), //TODO: Manage
-                            earthquakeInfoDetail("Tsunami", _earthquake?.tsunami.toString() ?? "tsunami"), //TODO: Manage
-                            earthquakeInfoDetail("Coords", _earthquake?.coordinates.toString() ?? "[0.0, 0.0]"), //TODO: Manage
-                            earthquakeInfoDetail("Depth", "depth"), //TODO: Depth mapper
-                            earthquakeInfoDetail("Magnitude", _earthquake?.magnitude.toString() ?? "0.0"), //TODO: Magnitude mapper
+                            earthquakeInfoDetail("Place", _earthquake?.place ?? "Unknown", false),
+                            earthquakeInfoDetail("Time", _earthquake?.time.toString() ?? "time", false), //TODO: Manage
+                            earthquakeInfoDetail("Tsunami", _earthquake?.tsunami.toString() ?? "tsunami", false), //TODO: Manage
+                            earthquakeInfoDetail("Coords", _earthquake?.coordinates.toString() ?? "[0.0, 0.0]", false), //TODO: Manage
+                            earthquakeInfoDetail("Depth", "depth", false), //TODO: Depth mapper
+                            earthquakeInfoDetail("Magnitude", _earthquake?.magnitude.toString() ?? "0.0", true), //TODO: Magnitude mapper
                             const SizedBox(height: 16),
                           ],
                         ),
@@ -166,16 +167,19 @@ class _EarthquakeDetailPageState extends State<EarthquakeDetailPage> {
     );
   }
 
-  Column earthquakeInfoDetail(String title, String description) {
+  Column earthquakeInfoDetail(String title, String description, bool isMagnitude) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 16),
         Text(
           "$title: ",
-          style: TextStyle(fontWeight: FontWeight.bold)),
+          style: const TextStyle(fontWeight: FontWeight.bold)),
         const SizedBox(height: 8),
-        Text(description),
+        Text(description,
+        style: isMagnitude
+            ? MagnitudeColorFormatter.getMagnitudeColor(_earthquake?.magnitude ?? 0.0)
+            : null),
       ]
     );
   }

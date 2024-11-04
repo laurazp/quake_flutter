@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:quake_flutter/core/formatters/magnitude_color_formatter.dart';
 import 'package:quake_flutter/model/earthquake.dart';
 import 'package:quake_flutter/presentation/navigation/navigation_routes.dart';
 
@@ -23,11 +24,12 @@ class EarthquakeListRow extends StatelessWidget {
             child: Row(
               mainAxisSize: MainAxisSize.max,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
+                SizedBox(
+                  width: 50,
                   child: Text(
-                    earthquake.magnitude.toString(), //TODO: Manage magnitude color, text size and just 2 decimal points!
-                    style: Theme.of(context).textTheme.titleMedium,
+                    earthquake.magnitude.toStringAsFixed(1),
+                    style: MagnitudeColorFormatter.getMagnitudeColor(earthquake.magnitude),
+                    textAlign: TextAlign.right,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -35,7 +37,7 @@ class EarthquakeListRow extends StatelessWidget {
                 const SizedBox(width: 16),
                 Expanded(
                   child: Text(
-                    earthquake.title ?? "Unknown", //TODO: Manage null title with place
+                    earthquake.title,
                     style: Theme.of(context).textTheme.titleSmall,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,

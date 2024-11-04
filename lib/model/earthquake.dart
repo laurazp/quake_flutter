@@ -1,11 +1,11 @@
 
 class Earthquake {
-  double? magnitude;
-  String? place;
+  double magnitude;
+  String place;
   double? time;
   String url;
   String tsunami;
-  String? title;
+  String title;
   String coordinates;
   String id;
 

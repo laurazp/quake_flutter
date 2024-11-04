@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:quake_flutter/core/formatters/earthquake_coords_formatter.dart';
 import 'package:quake_flutter/core/formatters/earthquake_title_formatter.dart';
 import 'package:quake_flutter/core/formatters/tsunami_value_formatter.dart';
@@ -7,8 +8,8 @@ import 'package:quake_flutter/model/earthquake.dart';
 class EarthquakeRemoteMapper {
   static Earthquake fromRemote(Feature remoteModel) {
     return Earthquake(
-      magnitude: remoteModel.properties.mag, 
-      place: remoteModel.properties.place, 
+      magnitude: remoteModel.properties.mag ?? 0.0, 
+      place: remoteModel.properties.place ?? "Unknown", 
       time: remoteModel.properties.time, 
       url: remoteModel.properties.url, 
       tsunami: TsunamiValueFormatter.getTsunamiValue(remoteModel.properties.tsunami ?? 0), 
@@ -49,4 +50,12 @@ class EarthquakeRemoteMapper {
   //     tsunami: properties.tsunami, 
   //     title: properties.title);
   // }
+
+  //TODO: Crear función para formatear magnitud y quitar de aquí
+  double roundToTwoDecimals(double? number) {
+    return double.parse(NumberFormat('#.00').format(number));
+
+    // double numberToRound = number ?? 0.0;
+    // return double.parse((numberToRound).toStringAsFixed(fractionDigits));
+  }
 }
