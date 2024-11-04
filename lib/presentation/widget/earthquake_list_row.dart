@@ -21,12 +21,13 @@ class EarthquakeListRow extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Row(
+              mainAxisSize: MainAxisSize.max,
               children: [
                 Flexible(
                   child: Padding(
                     padding: const EdgeInsets.only(right: 8.0),
                     child: Text(
-                      earthquake.magnitude.toString(), //TODO: Manage magnitude color and text size
+                      earthquake.magnitude.toString(), //TODO: Manage magnitude color, text size and just 2 decimal points!
                       style: Theme.of(context).textTheme.titleMedium,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -39,7 +40,7 @@ class EarthquakeListRow extends StatelessWidget {
                     padding: const EdgeInsets.only(right: 8.0),
                     child: Text(
                       earthquake.title ?? "Unknown", //TODO: Manage null title with place
-                      style: Theme.of(context).textTheme.titleMedium,
+                      style: Theme.of(context).textTheme.titleSmall,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),

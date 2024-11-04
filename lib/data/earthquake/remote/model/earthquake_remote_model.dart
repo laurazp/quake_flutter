@@ -1,3 +1,4 @@
+import 'package:quake_flutter/core/formatters/earthquake_coords_formatter.dart';
 import 'package:quake_flutter/model/earthquake.dart';
 
 class Feature {
@@ -32,9 +33,9 @@ class Feature {
       place: properties.place, 
       time: properties.time, 
       url: properties.url, 
-      tsunami: properties.tsunami, 
+      tsunami: properties.tsunami.toString(), 
       title: properties.title, 
-      coordinates: geometry?.coordinates ?? [0.0, 0.0], //TODO: Manage null coordinates!
+      coordinates: EarthquakeCoordsFormatter.getFormattedCoords(geometry?.coordinates ?? [0.0, 0.0]), //TODO: Manage null coordinates!
       id: id
     );
   }

@@ -37,6 +37,7 @@ dependencies:
   flutter_map: ^7.0.2
   latlong2: ^0.9.1
   get_it: ^8.0.1
+  measure: ^0.1.2+2
 
 dev_dependencies:
   flutter_test:

@@ -4,9 +4,9 @@ class Earthquake {
   String? place;
   double? time;
   String url;
-  int? tsunami;
+  String tsunami;
   String? title;
-  List<double> coordinates;
+  String coordinates;
   String id;
 
   Earthquake({

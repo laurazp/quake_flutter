@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quake_flutter/di/app_modules.dart';
+import 'package:quake_flutter/core/di/app_modules.dart';
 import 'package:quake_flutter/presentation/navigation/navigation_routes.dart';
 
 void main() {

@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:quake_flutter/di/app_modules.dart';
+import 'package:quake_flutter/core/di/app_modules.dart';
 import 'package:quake_flutter/model/earthquake_list.dart';
 import 'package:quake_flutter/model/earthquake.dart';
 import 'package:quake_flutter/presentation/model/resource_state.dart';
@@ -26,7 +26,7 @@ class _EarthquakesPageState extends State<EarthquakesPage> {
 
   final ScrollController _scrollController = ScrollController();
   bool _hasMoreItems = true;
-  String startTime = "2024-10-27"; 
+  String startTime = "2024-10-27"; //TODO: Modificar fechas
   String endTime = "2024-10-28";
   final int _limit = 50; //TODO: añadirlo en constantes y asignarlo sólo en la última llamada?
   int _offset = 1;
@@ -96,6 +96,7 @@ class _EarthquakesPageState extends State<EarthquakesPage> {
       ),
       body: SafeArea(child: _getContentView()),
       floatingActionButton: FloatingActionButton.small(
+        // shape: const CircleBorder(),
         onPressed: () => _scrollController.animateTo(
           0,
           duration: const Duration(milliseconds: 1050),
@@ -208,7 +209,7 @@ class _EarthquakesPageState extends State<EarthquakesPage> {
     }
 
     _earthquakes.addAll(response.earthquakes);
-    // _hasMoreItems = response.totalCount > _earthquakes.length;
+    // _hasMoreItems = response.totalCount > _earthquakes.length; //TODO: Add count to response
     _offset += 50;
 
     setState(() {});
